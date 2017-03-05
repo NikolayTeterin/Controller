@@ -1,12 +1,12 @@
-#define txPin 3 //��� �����������
-#define button 13 //��� ������
+#define txPin 3
+#define button 13
 
 void setup()
 {
 	pinMode(txPin, OUTPUT);
 	pinMode(button, INPUT);
 
-	Serial.begin(9600);  // ��� ��������� ���� ��������
+	Serial.begin(9600);
 	Serial.println("Came started");
 }
 
@@ -60,15 +60,13 @@ void loop() {
 }
 
 
-// ������� ���������� ��� � ����
 void SendCame4(long Code) {
-	for (int j = 0; j < 4; j++) { // ������� �������� 4 ���� ������.
-								  // ����� ���������� �������� 
+	for (int j = 0; j < 4; j++) {
 		digitalWrite(txPin, HIGH);
 		delayMicroseconds(320);
 		digitalWrite(txPin, LOW);
 		for (int i = 12; i > 0; i--) {
-			byte b = bitRead(Code, i - 1); // �������� ���������� � �������� ���
+			byte b = bitRead(Code, i - 1);
 			if (b) {
 				digitalWrite(txPin, LOW); // 1
 				delayMicroseconds(640);
@@ -102,15 +100,15 @@ void SendCameBrut(long CodeBrut)
 	Serial.println();
 	Serial.print("***BRUT***        ");
 	Serial.print(CodeBrut);
-	for (int j = 0; j < 4; j++) // ������� �������� ��� � ������ - 4 ���� ������.
+	for (int j = 0; j < 4; j++)
 	{
 		digitalWrite(txPin, HIGH);
 		delayMicroseconds(320);
-		digitalWrite(txPin, LOW);// �������� ��������� �������
+		digitalWrite(txPin, LOW);
 
 		for (byte i = 12; i>0; i--)
 		{
-			SendCameBitBrut(bitRead(CodeBrut, i - 1)); // �������� ���������� � �������� ���
+			SendCameBitBrut(bitRead(CodeBrut, i - 1));
 		}
 		delay(16);
 	}
